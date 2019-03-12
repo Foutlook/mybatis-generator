@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>plugin-tempalte</artifactId>
+        <groupId>com.fan.wwwarehose</groupId>
+        <version>2.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>plugin-demo</artifactId>
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.version>4.3.17.RELEASE</spring.version>
+    </properties>
+
+    <dependencies>
+        <!--spring-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- LOG -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.12</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+        </dependency>
+
+        <!-- 数据库 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.4.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.43</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- 编译插件-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.fan.wwwarehose</groupId>
+                <artifactId>plugin-module</artifactId>
+                <!--mvn dgenerator:tempalte-->
+                <version>2.0-SNAPSHOT</version>
+                <configuration>
+                    <driveClass>com.mysql.jdbc.Driver</driveClass>
+                    <url>
+                        jdbc:mysql://127.0.0.1:3306/dev-kai?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false
+                    </url>
+                    <user>root</user>
+                    <password>root</password>
+                    <tableConfigs>
+                        <tableConfig>
+                            <tableName>* </tableName>
+                            <daoConfig>
+                                <packageName>cn.fxkoutlook.dao</packageName>
+                                <outDir>
+                                    D:\idea-workspace\privately\plugintempalte\plugindemo\src\main\java\cn\fxkoutlook\dao
+                                </outDir>
+                            </daoConfig>
+                            <xmlConfig>
+                                <packageName>cn.fxkoutlook.dao</packageName>
+                                <outDir>
+                                    D:\idea-workspace\privately\plugintempalte\plugindemo\src\main\java\cn\fxkoutlook\dao
+                                </outDir>
+                            </xmlConfig>
+                            <modelConfig>
+                                <packageName>cn.fxkoutlook.entity</packageName>
+                                <outDir>
+                                    D:\idea-workspace\privately\plugintempalte\plugindemo\src\main\java\cn\fxkoutlook\entity
+                                </outDir>
+                            </modelConfig>
+                            <serviceImplConfig>
+                                <packageName> cn.fxkoutlook.service.impl</packageName>
+                                <outDir>
+                                    D:\idea-workspace\privately\plugintempalte\plugindemo\src\main\java\cn\fxkoutlook\service\impl
+                                </outDir>
+                            </serviceImplConfig>
+
+                            <serviceConfig>
+                                <packageName> cn.fxkoutlook.service.interf</packageName>
+                                <outDir>
+                                    D:\idea-workspace\privately\plugintempalte\plugindemo\src\main\java\cn\fxkoutlook\service\interf
+                                </outDir>
+                            </serviceConfig>
+                        </tableConfig>
+                    </tableConfigs>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
